@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Window for test rest-soap adapter</title>
+</head>
+<body>
+  <p>Result:</p>
+  <p th:text="${result}">VALUE</p>
+  <br/>
+  
+<form th:method="POST" th:action="@{/soap/test}" th:object="${calculatedData}">
+
+    <label for="a">a: </label>
+    <input type="text" th:field="*{a}" id="a"/>
+    
+    <br/>
+    <label for="b">b: </label>
+    <input type="text" th:field="*{b}" id="b"/>
+    
+    <br/>
+    <label for="operation">operation: </label>
+    <input type="text" th:field="*{operation}" id="operation"/>
+    
+    <br/>
+    <input type="submit" value="Test!"/>
+</form>
+</body>
+</html>
