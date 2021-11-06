@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import soap_rest_adapter.models.CalculatedData;
-import soap_rest_adapter.services.SoapCalculatorService;
+import soap_rest_adapter.models.SoapCalculator;
 
 @Controller
 @RequestMapping("/soap")
 @Validated
 public class soapRestAdapterController {
 	@Autowired
-	private SoapCalculatorService soapCalculatorService;
+	private SoapCalculator soapCalculator;
 
 	@GetMapping("/test")
 	public String openTestWindow(Model model) {
@@ -30,6 +30,8 @@ public class soapRestAdapterController {
 	
 	@PostMapping("test")
 	public ResponseEntity<String> requestToSoap(@ModelAttribute("calculatedData") @Valid CalculatedData calculatedData) {
-		return ResponseEntity.ok(String.valueOf(soapCalculatorService.calc(calculatedData)));
+		soapCalculator.setCalculateData(calculatedData);
+		soapCalculator.request();
+		return ResponseEntity.ok(soapCalculator.getResponse());
 	}
 }
