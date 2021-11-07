@@ -1,59 +1,15 @@
 package soap_rest_adapter.models;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.reactive.function.client.WebClient;
 
 @Component
 public class SoapCalculator {
-	private String url;
-	private String xml;
-	private StringBuffer response = new	StringBuffer();
+	@Autowired
+	private WebClient webClient;
 	
-	public void request() {
-		String inputLine;
-
-		try {
-			URL obj = new URL(url);
-			HttpURLConnection connection = (HttpURLConnection) obj.openConnection();
-			connection.setRequestMethod("POST");
-			connection.setRequestProperty("Content-Type", "application/soap+xml; charset=utf-8");
-			connection.setDoOutput(true);
-			
-			DataOutputStream outputStream = new DataOutputStream(connection.getOutputStream());
-			outputStream.writeBytes(xml);
-			outputStream.flush();
-			outputStream.close();
-			
-			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-			
-			while ((inputLine = bufferedReader.readLine()) != null) {
-				response.append(inputLine);
-			}
-			bufferedReader.close();
-			
-		} catch (Exception e) {
-			System.out.println("exception" + e);
-		}
-	}
-	
-	public void setURL(String url) {
-		this.url = url;
-	}
-	
-	public void setXML(String xml) {
-		this.xml = xml;
-	}
-	
-	public String getResponse() {
-		return response.toString();
-	}
-	
-	public void setCalculateData(CalculatedData calculatedData) {
+	public String request(CalculatedData calculatedData) {
 		String url = "";
 		String xml = "";
 		
@@ -103,7 +59,11 @@ public class SoapCalculator {
 					+ "</soap12:Envelope>";
 		}
 		
-		setURL(url);
-		setXML(xml);
+		return webClient.post()
+				.uri(url)
+				.bodyValue(xml)
+				.retrieve()
+				.bodyToMono(String.class)
+				.block();
 	}
 }

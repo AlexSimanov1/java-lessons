@@ -30,8 +30,6 @@ public class soapRestAdapterController {
 	
 	@PostMapping("test")
 	public ResponseEntity<String> requestToSoap(@ModelAttribute("calculatedData") @Valid CalculatedData calculatedData) {
-		soapCalculator.setCalculateData(calculatedData);
-		soapCalculator.request();
-		return ResponseEntity.ok(soapCalculator.getResponse());
+		return ResponseEntity.ok(soapCalculator.request(calculatedData));
 	}
 }
