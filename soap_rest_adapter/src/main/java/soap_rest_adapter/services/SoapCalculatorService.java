@@ -13,20 +13,17 @@ public class SoapCalculatorService {
 	
 	public String calc(CalculatedData calculatedData) {
 		String result = "";
-		//SoapCalculator soapCalculator = new SoapCalculator();
-		//result = soapCalculator.add(calculatedData.getA(), calculatedData.getB());
-		/*
-		if (calculatedData.getOperation().equals("add")) {
-			//result = SoapCalculator.add();
-			result = calculatedData.getA() + calculatedData.getB();
-		} else if (calculatedData.getOperation().equals("divide")) {
-			result = calculatedData.getA() / calculatedData.getB();
-		} else if (calculatedData.getOperation().equals("multiply")) {
-			result = calculatedData.getA() * calculatedData.getB();
-		} else if (calculatedData.getOperation().equals("subtract")) {
-			result = calculatedData.getA() - calculatedData.getB();
+		
+		if (calculatedData.getOperation().equals("Add")) {
+			result = soapCalculator.add(calculatedData.getA(), calculatedData.getB());
+		} else if (calculatedData.getOperation().equals("Divide")) {
+			result = soapCalculator.divide(calculatedData.getA(), calculatedData.getB());
+		} else if (calculatedData.getOperation().equals("Multiply")) {
+			result = soapCalculator.multiply(calculatedData.getA(), calculatedData.getB());
+		} else if (calculatedData.getOperation().equals("Subtract")) {
+			result = soapCalculator.subtract(calculatedData.getA(), calculatedData.getB());
 		}
-		*/
+		
 		return result;
 	}
 }
