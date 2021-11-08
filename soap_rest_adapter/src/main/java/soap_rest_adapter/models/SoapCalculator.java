@@ -24,7 +24,7 @@ public class SoapCalculator {
 						+ "</soap12:Envelope>", a, b);
 		return this.request();
 	}
-	
+
 	public String divide(int a, int b) {
 		url = "http://www.dneonline.com/calculator.asmx?op=Divide";
 		xml = String.format("<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n"

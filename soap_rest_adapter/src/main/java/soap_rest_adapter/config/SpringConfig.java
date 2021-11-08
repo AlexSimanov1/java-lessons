@@ -1,6 +1,9 @@
 package soap_rest_adapter.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -17,6 +20,7 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 @Configuration
 @ComponentScan("soap_rest_adapter")
 @EnableWebMvc
+@EnableCaching
 public class SpringConfig implements WebMvcConfigurer {
 
     private final ApplicationContext applicationContext;
@@ -63,4 +67,8 @@ public class SpringConfig implements WebMvcConfigurer {
 		return webClient;
     }
     
+    @Bean
+    public CacheManager cacheManager() {
+        return new ConcurrentMapCacheManager("calculatedData");
+    }
 }

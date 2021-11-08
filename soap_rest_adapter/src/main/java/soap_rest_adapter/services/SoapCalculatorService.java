@@ -1,9 +1,9 @@
 package soap_rest_adapter.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import soap_rest_adapter.models.CalculatedData;
 import soap_rest_adapter.models.Operation;
 import soap_rest_adapter.models.SoapCalculator;
 
@@ -11,22 +11,23 @@ import soap_rest_adapter.models.SoapCalculator;
 public class SoapCalculatorService {
 	@Autowired
 	private SoapCalculator soapCalculator;
-	
-	public String calc(CalculatedData calculatedData) {
+
+	@Cacheable(cacheNames="calculatedData")
+	public String calcCashe(int a, int b, String operation) {
 		String result = "";
 		
-		switch(Operation.valueOf(calculatedData.getOperation())) {
+		switch(Operation.valueOf(operation)) {
 		case Add:
-			result = soapCalculator.add(calculatedData.getA(), calculatedData.getB());
+			result = soapCalculator.add(a, b);
 			break;
 		case Multiply:
-			result = soapCalculator.multiply(calculatedData.getA(), calculatedData.getB());
+			result = soapCalculator.multiply(a, b);
 			break;
 		case Divide:
-			result = soapCalculator.divide(calculatedData.getA(), calculatedData.getB());
+			result = soapCalculator.divide(a, b);
 			break;
 		case Subtract:
-			result = soapCalculator.subtract(calculatedData.getA(), calculatedData.getB());
+			result = soapCalculator.subtract(a, b);
 			break;
 		default:
 			break;

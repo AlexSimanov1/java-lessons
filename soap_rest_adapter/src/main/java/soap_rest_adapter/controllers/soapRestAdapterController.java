@@ -27,9 +27,9 @@ public class soapRestAdapterController {
 		model.addAttribute("calculatedData", new CalculatedData());
 		return "test_window";
 	}
-	
+
 	@PostMapping("test")
 	public ResponseEntity<String> requestToSoap(@ModelAttribute("calculatedData") @Valid CalculatedData calculatedData) {
-		return ResponseEntity.ok(soapCalculatorService.calc(calculatedData));
+		return ResponseEntity.ok(soapCalculatorService.calcCashe(calculatedData.getA(), calculatedData.getB(), calculatedData.getOperation()));
 	}
 }
