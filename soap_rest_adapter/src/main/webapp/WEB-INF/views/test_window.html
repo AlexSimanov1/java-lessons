@@ -5,7 +5,7 @@
 <title>Window for test rest-soap adapter</title>
 </head>
 <body>
-<form th:method="POST" th:action="@{/soap/test}" th:object="${calculatedData}">
+<form th:method="POST" th:action="@{/soap/calculator}" th:object="${calculatedData}">
 
     <label for="a">a: </label>
     <input type="text" th:field="*{a}" id="a"/>

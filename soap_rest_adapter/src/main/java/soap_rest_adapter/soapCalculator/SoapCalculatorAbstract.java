@@ -11,8 +11,6 @@ public abstract class SoapCalculatorAbstract {
 	
 	public String calc(int a, int b) {
 		xml = String.format(xml_sample, a, b);
-		System.out.println(url);
-		System.out.println(webClient);
 		return request();
 	}
 	
