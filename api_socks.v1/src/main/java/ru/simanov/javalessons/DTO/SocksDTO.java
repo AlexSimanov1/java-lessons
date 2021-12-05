@@ -12,7 +12,7 @@ public class SocksDTO {
 	private String color;
 	
 	@Min(value = 0, message = "cottonPart should be greater than 0")
-	@Max(value = 100, message = "cottonPart should be less than 0")
+	@Max(value = 100, message = "cottonPart should be less or equal than 100")
 	private int cottonPart;
 	
 	@Min(value = 0, message = "quantity should be greater than 0")
@@ -40,5 +40,20 @@ public class SocksDTO {
 	
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+	
+	public void hundleValidate() throws Exception {
+		
+		if (color == null)
+			throw new Exception("Color required");
+		
+		if (cottonPart < 0)
+			throw new Exception("cottonPart should be greater than 0");
+		
+		if (cottonPart > 100)
+			throw new Exception("cottonPart should be less or equal than 100");
+		
+		if (quantity < 0)
+			throw new Exception("quantity should be greater than 0");
 	}
 }
