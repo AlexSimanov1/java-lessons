@@ -20,7 +20,7 @@ import ru.simanov.javalessons.DTO.SocksDTO;
 
 
 @Controller
-@RequestMapping("/api/socks")
+@RequestMapping(value = "/api/socks", headers = "Content-Type=application/json")
 @Validated
 public class SocksController {
 	private Gson gson = new Gson();
@@ -36,8 +36,7 @@ public class SocksController {
 		return ResponseEntity.ok(String.valueOf(5454));
 	}
 	
-	@PostMapping(value = "/income",
-			    headers = "Content-Type=application/json")
+	@PostMapping(value = "/income")
 	public ResponseEntity<String> income(@RequestBody String json) {
 		
 		SocksDTO socks;
@@ -50,14 +49,11 @@ public class SocksController {
 		            .body(e.toString());
 		}
 		
-		System.out.println("color = " + socks.getColor());
-		System.out.println("cottonpart = " + socks.getCottonPart());
-		System.out.println("quantity = " + socks.getQuantity());
+		System.out.println(socks.to_string());
 		return ResponseEntity.ok(json);
 	}
 	
-	@PostMapping(value = "/outcome",
-		    	headers = "Content-Type=application/json")
+	@PostMapping(value = "/outcome")
 	public ResponseEntity<String> outcome(@RequestBody String json) {
 		SocksDTO socks;
 		
@@ -69,9 +65,7 @@ public class SocksController {
 		            .body(e.toString());
 		}
 		
-		System.out.println("color = " + socks.getColor());
-		System.out.println("cottonpart = " + socks.getCottonPart());
-		System.out.println("quantity = " + socks.getQuantity());
+		System.out.println(socks.to_string());
 		return ResponseEntity.ok(json);
 	}
 	

@@ -56,4 +56,10 @@ public class SocksDTO {
 		if (quantity < 0)
 			throw new Exception("quantity should be greater than 0");
 	}
+	
+	public String to_string() {
+		return "color: " + color +
+				"\n cottonPart: " + cottonPart +
+				"\n quantity: " + quantity;
+	}
 }
