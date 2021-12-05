@@ -1,22 +1,37 @@
-package ru.simanov.javalessons.DTO;
+package ru.simanov.javalessons.models;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-import org.springframework.stereotype.Component;
-
-@Component
-public class SocksDTO {
-	@NotEmpty(message = "Color required")
+@Entity
+@Table(name = "socks")
+public class Socks {
+	
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
+	
+	@Column(name = "color")
 	private String color;
 	
-	@Min(value = 0, message = "cottonPart should be greater than 0")
-	@Max(value = 100, message = "cottonPart should be less or equal than 100")
+	@Column(name = "cotton_part")
 	private int cottonPart;
 	
-	@Min(value = 0, message = "quantity should be greater than 0")
+	@Column(name = "quantity")
 	private int quantity;
+	
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
 	
 	public String getColor() {
 		return color;
@@ -57,9 +72,10 @@ public class SocksDTO {
 			throw new Exception("quantity should be greater than 0");
 	}
 	
-	public String to_string() {
-		return "color: " + color +
-				"\n cottonPart: " + cottonPart +
-				"\n quantity: " + quantity;
+	@Override
+	public String toString() {
+		return "color: " + color + "\n" +
+				"cottonPart: " + cottonPart + "\n" +
+				"quantity: " + quantity;
 	}
 }
