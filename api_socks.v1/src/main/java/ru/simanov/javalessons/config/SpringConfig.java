@@ -14,4 +14,5 @@ public class SpringConfig implements WebMvcConfigurer {
     public MethodValidationPostProcessor methodValidationPostProcessor() {
         return new MethodValidationPostProcessor();
     }
+
 }
