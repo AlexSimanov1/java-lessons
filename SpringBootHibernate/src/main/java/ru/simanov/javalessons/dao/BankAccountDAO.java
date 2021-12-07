@@ -39,7 +39,8 @@ public class BankAccountDAO {
 	}
 	
 	// MANDATORY: Transaction must be created before.
-	@Transactional(propagation = Propagation.MANDATORY)
+	//@Transactional(propagation = Propagation.MANDATORY)
+	@Transactional
 	public void addAmount(Long id, double amount) throws BankTransactionException {
 		BankAccount account = this.findById(id);
 		

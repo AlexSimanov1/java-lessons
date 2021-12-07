@@ -29,7 +29,6 @@ public class MainController {
 		
 		try {
 			sendMoneyForm = gson.fromJson(json, SendMoneyForm.class);
-			System.out.println(sendMoneyForm);
 			bankAccountDAO.sendMoney(sendMoneyForm.getFromAccountId(), sendMoneyForm.getToAccountId(), sendMoneyForm.getAmount());
 		} catch(BankTransactionException e) {
 			return ResponseEntity
